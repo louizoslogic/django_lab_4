@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+	   <meta charset="utf-8">
+           <title></title>
+	</head>
+	<body>
+		<header> <a href="/">Tweeter<header>
+	<nav> 
+
+		<a href="signup/">signup</a>
+		<a href="login_page/">login</a>
+		<a href="logout/">logout</a>
+	</nav>
+
+	<form method="post">
+                {% csrf_token %}
+				
+		<input type="text" name="message"/> message
+		<button type="submit" formaction="{% url 'posts:makechirp' %}">Post</button>
+         
+	</form>
+
+	<form method="post">
+                {% csrf_token %}
+                {% for post in posts %}
+                        <li>
+				{{ post.user }} {{ post.message }} {{ post.date }} {{ post.likes }}
+				<button type="submit" formaction="{% url 'posts:oneup' post.id %}">Like</button>
+                        </li>
+                    
+                {% endfor %}
+        </form>
+        </ul>	
+	</body>
+
+</html>
+
